@@ -7,7 +7,7 @@
    <meta name="keywords" content="">
    <meta name="author" content="">
 
-   <title>CodeIgniter Bootstrap</title>
+   <title>Simple Notification Service</title>
 
    <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
    <link href="<?= base_url('assets/css/bootstrap-responsive.min.css') ?>" rel="stylesheet">
