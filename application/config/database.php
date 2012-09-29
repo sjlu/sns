@@ -48,10 +48,43 @@
 $active_group = 'default';
 $active_record = TRUE;
 
+if (isset($_SERVER['DATABASE_URL']))
+{
+	$active_group = 'heroku';
+	postgres://mclimgoxyadegv:4bo4Hk2ZcRVof-4fEo7sDtIAa3@ec2-54-243-235-123.compute-1.amazonaws.com:5432/d9lus3kqgpqmkv
+
+	$db['heroku']['dbprefix'] = '';
+	$db['heroku']['pconnect'] = TRUE;
+	$db['heroku']['db_debug'] = TRUE;
+	$db['heroku']['cache_on'] = FALSE;
+	$db['heroku']['cachedir'] = '';
+	$db['heroku']['char_set'] = 'utf8';
+	$db['heroku']['dbcollat'] = 'utf8_general_ci';
+	$db['heroku']['swap_pre'] = '';
+	$db['heroku']['autoinit'] = TRUE;
+	$db['heroku']['stricton'] = FALSE;
+
+	list($driver, $username, $password, $hostname, $port, $database) 
+		= preg_split('/[:\/@]', $_SERVER['DATABASE_URL'], 6, PREG_SPLIT_NO_EMPTY);
+
+	if ($driver == "postgres")
+		$driver = "postgre";
+
+	$db['heroku']['hostname'] = $hostname . ':' . $port;
+	$db['heroku']['username'] = $username;
+	$db['heroku']['password'] = $password;
+	$db['heroku']['database'] = $database;
+
+	if ($driver == "postgres")
+		$db['heroku']['dbdriver'] = "postgre";
+	else
+		$db['heroku']['dbdriver'] = $driver;
+}
+
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
+$db['default']['username'] = 'root';
 $db['default']['password'] = '';
-$db['default']['database'] = '';
+$db['default']['database'] = 'sns';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
