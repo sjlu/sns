@@ -64,7 +64,7 @@ if (isset($_SERVER['DATABASE_URL']))
 	$db['heroku']['stricton'] = FALSE;
 
 	list($driver, $username, $password, $hostname, $port, $database) 
-		= preg_split('/[:\/@]', $_SERVER['DATABASE_URL'], 6, PREG_SPLIT_NO_EMPTY);
+		= preg_split('/[:\/@]/', $_SERVER['DATABASE_URL'], 6, PREG_SPLIT_NO_EMPTY);
 
 	if ($driver == "postgres")
 		$driver = "postgre";
