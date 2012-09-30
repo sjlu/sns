@@ -78,6 +78,8 @@ if (isset($_SERVER['DATABASE_URL']))
 		$db['heroku']['dbdriver'] = "postgre";
 	else
 		$db['heroku']['dbdriver'] = $driver;
+
+	print_r($db['heroku']);
 }
 
 $db['default']['hostname'] = 'localhost';
