@@ -39,6 +39,11 @@ class Key extends API_Controller {
 			$this->error_response(100);
 
 		$deleted = $this->keys_model->delete_key($user, $key);
+
+		if ($deleted)
+			$this->response(array('success' => 'Key removed.'));
+		else
+			$this->response(array('success' => 'Key does not exist.'));
 	}
 
 }

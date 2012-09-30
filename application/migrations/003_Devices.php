@@ -1,11 +1,11 @@
 <?php
 
-class Migration_Keys extends CI_Migration
+class Migration_Devices extends CI_Migration
 {
 	function up()
 	{
 		/**
-		 * Keys table
+		 * Devices table
 		 */
 		$fields = array(
 			'id' => array(
@@ -19,11 +19,11 @@ class Migration_Keys extends CI_Migration
 				'constraint' => 5,
 				'unsigned' => TRUE,
 			),
-			'key' => array(
+			'duid' => array(
 				'type' => 'VARCHAR',
-				'constraint' => 32
+				'constraint' => 128
 			),
-			'secret' => array(
+			'push_key' => array(
 				'type' => 'TEXT'
 			)
 		);
@@ -31,12 +31,12 @@ class Migration_Keys extends CI_Migration
 		$this->dbforge->add_field($fields);
 		$this->dbforge->add_key('id', TRUE);
 		$this->dbforge->add_key('user_id', FALSE);
-		$this->dbforge->add_key('key', TRUE);
-		$this->dbforge->create_table('keys');
+		$this->dbforge->add_key('duid', FALSE);
+		$this->dbforge->create_table('devices');
 	}
 
 	function down()
 	{
-		$this->dbforge->drop_table('keys');
+		$this->dbforge->drop_table('devices');
 	}
 }

@@ -59,7 +59,7 @@ class Keys_model extends CI_Model {
 			return false;
 
 		$this->db->where('key', $key)
-			->where('user', $user)
+			->where('user_id', $user)
 			->delete('keys');
 
 		return true;
@@ -67,7 +67,7 @@ class Keys_model extends CI_Model {
 
 	function get_keys($user)
 	{
-		$this->db->where('user', $user)
+		$this->db->where('user_id', $user)
 			->select(array('key', 'secret'))
 			->from('keys');
 
