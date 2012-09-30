@@ -63,4 +63,5 @@
    		</tbody>
    	</table>
    </div>
+   <p class="pull-right">A free service provided with <i class="icon-heart"></i> from <a href="http://burst-dev.com">Burst Development</a>, developed by <a href="http://stevenlu.com">Steven Lu</a></p>
 </div>
