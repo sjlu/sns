@@ -20,7 +20,8 @@ class API_Controller extends REST_Controller
 			'100' => 'Inputs are missing.',
 			'101' => 'Email is invalid.',
 			'102' => 'Email has already been used.',
-			'103' => 'Password is too short.'
+			'103' => 'Password is too short.',
+			'200' => 'User session is required.'
 		);
 
 		if (isset($errors[$error_code]))

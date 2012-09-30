@@ -5,7 +5,7 @@ class Session extends API_Controller {
    function index_get()
    {
    	$this->load->library('session');
-   	$this->load->library('users_model');
+   	$this->load->model('users_model');
 
    	$user = $this->session->userdata('user');
 
