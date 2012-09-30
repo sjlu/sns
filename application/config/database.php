@@ -69,7 +69,8 @@ if (isset($_SERVER['DATABASE_URL']))
 	if ($driver == "postgres")
 		$driver = "postgre";
 
-	$db['heroku']['hostname'] = $hostname . ':' . $port;
+	$db['heroku']['hostname'] = $hostname;
+	$db['heroku']['port'] = $port;
 	$db['heroku']['username'] = $username;
 	$db['heroku']['password'] = $password;
 	$db['heroku']['database'] = $database;
@@ -78,8 +79,6 @@ if (isset($_SERVER['DATABASE_URL']))
 		$db['heroku']['dbdriver'] = "postgre";
 	else
 		$db['heroku']['dbdriver'] = $driver;
-
-	print_r($db['heroku']);
 }
 
 $db['default']['hostname'] = 'localhost';
