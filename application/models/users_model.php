@@ -1,26 +1,27 @@
 <?php
 
-class User_model extends CI_Model {
+class Users_model extends CI_Model {
 
 	function __construct()
 	{
+		parent::__construct();
 		$this->load->database();
 	}
 
-	private function email_exists($email)
+	function email_exists($email)
 	{
 		$this->db->where('email', $email)
 			->from('users');
 
 		if (!$this->db->count_all_results())
-			return true;
+			return false;
 		
-		return false;
+		return true;
 	}
 
 	function create($email, $password)
 	{
-		$this->load->libray('encrypt');
+		$this->load->library('encrypt');
 		$password = $this->encrypt->encode($password);
 
 		$this->db->set('email', $email)
@@ -28,7 +29,7 @@ class User_model extends CI_Model {
 
 		$this->db->insert('users');
 
-		return true;
+		return array('id' => $this->db->insert_id(), 'email' => $email);
 	}
 
 	function validate($email, $password)

@@ -51,7 +51,6 @@ $active_record = TRUE;
 if (isset($_SERVER['DATABASE_URL']))
 {
 	$active_group = 'heroku';
-	postgres://mclimgoxyadegv:4bo4Hk2ZcRVof-4fEo7sDtIAa3@ec2-54-243-235-123.compute-1.amazonaws.com:5432/d9lus3kqgpqmkv
 
 	$db['heroku']['dbprefix'] = '';
 	$db['heroku']['pconnect'] = TRUE;
@@ -83,7 +82,7 @@ if (isset($_SERVER['DATABASE_URL']))
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = '';
+$db['default']['password'] = 'root';
 $db['default']['database'] = 'sns';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
