@@ -9,6 +9,25 @@ class Keys_model extends CI_Model {
 		$this->load->database();
 	}
 
+	function get_key_id($key)
+	{
+		if (empty($key))
+			return null;
+
+		$this->db->where('key', $key)
+			->select('id')
+			->from('keys');
+
+		$query = $this->db->get();
+
+		if (!$query->num_rows())
+			return null;
+
+		$row = $query->row_array();
+
+		return $row['id'];
+	}
+
 	private function check_key_exists($key)
 	{
 		if (empty($key))
@@ -30,27 +49,30 @@ class Keys_model extends CI_Model {
 		return $key;
 	}
 
-	private function generate_secret()
-	{
-		$this->load->helper('string');
-		$secret = random_string('alnum', 64);
-		return $secret;
-	}
+	// private function generate_secret()
+	// {
+	// 	$this->load->helper('string');
+	// 	$secret = random_string('alnum', 64);
+	// 	return $secret;
+	// }
 
 	function add_key($user_id)
 	{
 		$key = null;
-		while (check_key_exists($key))
+		while ($this->check_key_exists($key))
 			$key = $this->generate_key();
 
-		$secret = $this->generate_secret();
+		// $secret = $this->generate_secret();
 
 		$this->db->set('user_id', $user_id)
 			->set('key', $key)
-			->set('secret', $secret)
+			// ->set('secret', $secret)
 			->insert('keys');
 
-		return array('key' => $key, 'secret' => $secret);
+		return array(
+			'key' => $key, 
+			// 'secret' => $secret
+		);
 	}
 
 	function delete_key($user, $key)
@@ -68,7 +90,10 @@ class Keys_model extends CI_Model {
 	function get_keys($user)
 	{
 		$this->db->where('user_id', $user)
-			->select(array('key', 'secret'))
+			->select(array(
+				'key', 
+				// 'secret'
+			))
 			->from('keys');
 
 		$query = $this->db->get();

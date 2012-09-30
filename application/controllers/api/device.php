@@ -7,17 +7,7 @@ class Device extends API_Controller {
 	function __construct()
 	{
 		parent::__construct();
-
-		/**
-		 * Session is requried for all functions
-		 * in this API controller.
-		 */
-   	$this->load->library('session');
-   	$user = $this->session->userdata('user');
-   	if (!$user)
-   		$this->error_response(200);
-
-   	$this->USER = $user;
+		$this->USER = $this->require_session();
 
 		$this->load->model('devices_model');
 	}

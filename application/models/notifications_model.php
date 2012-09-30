@@ -2,9 +2,41 @@
 
 class Notifications_Model extends CI_Model {
 
-	function create($user, $message)
+	function __construct()
 	{
-	
+		parent::__construct();
+
+		$this->load->database();
+	}
+
+	function enqueue($key, $subject, $message)
+	{
+		$this->db->set('key_id', $key)
+			->set('subject', $subject)
+			->set('message', $message);
+
+		$this->db->insert('notifications');
+
+		return true;
+	}
+
+	function dequeue($limit = 5)
+	{
+		$string = random_string('unique');
+
+		$this->db->set('queue', $string)
+			->update('notifications')
+			->limit($limit);
+
+		$this->db->where('queue', $string)
+			->select('notifications.subject, notifications.message, devices.duid, devices.push_key')
+			->join('keys', 'notifications.key_id = keys.id', 'left')
+			->join('devices', 'keys.user_id = devices.user_id', 'left')
+			->from('notifications');
+
+		$query = $this->db->get();
+
+		return $query->result_array();
 	}
 
 }

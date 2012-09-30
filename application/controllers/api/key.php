@@ -7,17 +7,7 @@ class Key extends API_Controller {
 	function __construct()
 	{
 		parent::__construct();
-
-		/**
-		 * Session is requried for all functions
-		 * in this API controller.
-		 */
-   	$this->load->library('session');
-   	$user = $this->session->userdata('user');
-   	if (!$user)
-   		$this->error_response(200);
-
-   	$this->USER = $user;
+		$this->USER = $this->require_session();
 
 		$this->load->model('keys_model');
 	}
@@ -38,7 +28,7 @@ class Key extends API_Controller {
 		if (empty($key))
 			$this->error_response(100);
 
-		$deleted = $this->keys_model->delete_key($user, $key);
+		$deleted = $this->keys_model->delete_key($this->USER, $key);
 
 		if ($deleted)
 			$this->response(array('success' => 'Key removed.'));

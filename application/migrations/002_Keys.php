@@ -23,9 +23,9 @@ class Migration_Keys extends CI_Migration
 				'type' => 'VARCHAR',
 				'constraint' => 32
 			),
-			'secret' => array(
-				'type' => 'TEXT'
-			)
+			// 'secret' => array(
+			// 	'type' => 'TEXT'
+			// )
 		);
 
 		$this->dbforge->add_field($fields);

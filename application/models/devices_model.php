@@ -35,7 +35,7 @@ class Devices_model extends CI_Model {
 
 		$this->db->where('duid', $duid)
 			->where('user_id', $user)
-			->delete('keys');
+			->delete('devices');
 
 		return true;
 	}

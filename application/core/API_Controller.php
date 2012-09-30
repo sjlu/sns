@@ -21,12 +21,27 @@ class API_Controller extends REST_Controller
 			'101' => 'Email is invalid.',
 			'102' => 'Email has already been used.',
 			'103' => 'Password is too short.',
-			'200' => 'User session is required.'
+			'200' => 'User session is required.',
+			'300' => 'API Key is not valid.'
 		);
 
 		if (isset($errors[$error_code]))
 			$this->response(array('error' => array('code' => $error_code, 'message' => $errors[$error_code])), 400);
 
 		$this->response(array('error' => array('code' => 500, 'message' => 'Unknown error.')));
+	}
+
+	function require_session()
+	{
+		/**
+		 * Session is requried for all functions
+		 * in this API controller.
+		 */
+   	$this->load->library('session');
+   	$user = $this->session->userdata('user');
+   	if (!$user)
+   		$this->error_response(200);
+
+   	return $user;
 	}
 }
