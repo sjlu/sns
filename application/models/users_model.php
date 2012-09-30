@@ -8,6 +8,23 @@ class Users_model extends CI_Model {
 		$this->load->database();
 	}
 
+	private function encode_password($password)
+	{
+		$salt = $this->config->item('encryption_key');
+		return sha1($password . $salt);
+	}
+
+	function get_user($id)
+	{
+		$this->db->select(array('id', 'email'))
+			->where('id', $id)
+			->from('users');
+
+		$query = $this->db->get();
+
+		return $query->result_row();
+	}
+
 	function email_exists($email)
 	{
 		$this->db->where('email', $email)
@@ -22,7 +39,7 @@ class Users_model extends CI_Model {
 	function create($email, $password)
 	{
 		$this->load->library('encrypt');
-		$password = $this->encrypt->encode($password);
+		$password = $this->encode_password($password);
 
 		$this->db->set('email', $email)
 			->set('password', $password);
@@ -36,15 +53,19 @@ class Users_model extends CI_Model {
 	{
 		$this->load->library('encrypt');
 
-		$password = $this->encrypt->encode($password);
+		$password = $this->encode_password($password);
 
-		$this->db->where('email', $email)
-			->where('password', $password);
+		$this->db->select(array('id', 'email'))
+			->where('email', $email)
+			->where('password', $password)
+			->from('users');
 
-		if ($this->db->count_all_results())
-			return true;
+		$query = $this->db->get();
 
-		return false;
+		if (!$query->num_rows())
+			return false;
+
+		return $query->row_array();
 	}
 
 }

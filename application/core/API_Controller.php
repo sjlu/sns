@@ -16,6 +16,7 @@ class API_Controller extends REST_Controller
 	function error_response($error_code)
 	{
 		$errors = array(
+			'1' => 'Email is not registered or password is invalid.',
 			'100' => 'Inputs are missing.',
 			'101' => 'Email is invalid.',
 			'102' => 'Email has already been used.',
