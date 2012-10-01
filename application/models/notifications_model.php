@@ -27,6 +27,7 @@ class Notifications_Model extends CI_Model {
 
 		$this->db->set('queue', $string)
 			->limit($limit)
+			->where('queue', null)
 			->update('notifications');
 
 		$this->db->where('queue', $string)
