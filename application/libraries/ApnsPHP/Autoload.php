@@ -45,6 +45,9 @@ function ApnsPHP_Autoload($sClassName)
 		$sPath, DIRECTORY_SEPARATOR,
 		str_replace('_', DIRECTORY_SEPARATOR, $sClassName)
 	);
+	// added by sjlu to ignore loading CI files.
+	if (preg_match('/CI/', $sFile))
+		return;
 	if (!is_file($sFile) || !is_readable($sFile)) {
 		throw new Exception("Class file '{$sFile}' does not exists");
 	}

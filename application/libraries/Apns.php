@@ -1,5 +1,4 @@
 <?php
-require_once('ApnsPHP/Autoload.php');
 
 class Apns {
    
@@ -15,8 +14,11 @@ class Apns {
       $this->certificate_path = $ci->config->item('certificate_path');
       $this->root_certificate_path = $ci->config->item('root_certificate_path');
 
+      require_once(APPPATH.'libraries/ApnsPHP/Autoload.php');
       $this->CONNECTION = new ApnsPHP_Push(ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION, $this->certificate_path);
       $this->CONNECTION->setRootCertificationAuthority($this->root_certificate_path);
+      $this->CONNECTION->connect();
+
    }
 
    public function send_message($key, $message)
@@ -27,10 +29,12 @@ class Apns {
       $message->setSound();
       $message->setExpiry(30);
 
-      $this->CONNECTION->connect();
       $this->CONNECTION->add($message);
       $this->CONNECTION->send();
-      $this->CONNECTION->disconnect();
    }
 
+   public function __destruct()
+   {
+      $this->CONNECTION->disconnect();
+   }
 }

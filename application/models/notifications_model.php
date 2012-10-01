@@ -22,11 +22,12 @@ class Notifications_Model extends CI_Model {
 
 	function dequeue($limit = 5)
 	{
+		$this->load->helper('string');
 		$string = random_string('unique');
 
 		$this->db->set('queue', $string)
-			->update('notifications')
-			->limit($limit);
+			->limit($limit)
+			->update('notifications');
 
 		$this->db->where('queue', $string)
 			->select('notifications.subject, notifications.message, devices.duid, devices.push_key')
