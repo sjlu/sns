@@ -10,7 +10,7 @@ class Send extends Web_Controller {
 		$notifications = $this->notifications_model->dequeue();
 
 		foreach ($notifications as $n)
-			$this->apns->send_message($n['push_key'], $n['subject'].'-'.$n['message']);
+			$this->apns->send_message($n['push_key'], $n['subject'].' - '.$n['message']);
 	}
 
 }

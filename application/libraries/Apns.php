@@ -26,12 +26,12 @@ class Apns {
       $this->CONNECTION->setRootCertificationAuthority($this->root_certificate_path);
    }
 
-   public function send_message($key, $message)
+   public function send_message($key, $text)
    {
       $message = new ApnsPHP_Message($key);
       $message->setCustomIdentifier('notification');
-      $message->setBadge(1);
-      $message->setText($message);
+      // $message->setBadge(1);
+      $message->setText($text);
       $message->setSound();
       $message->setExpiry(30);
 
