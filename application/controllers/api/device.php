@@ -25,7 +25,12 @@ class Device extends API_Controller {
 		if ($added)
 			$this->response(array('success' => 'Device added.'));
 		
-		$this->devices_model->update_device($this->USER, $duid, $push_key);
+		$updated = $this->devices_model->update_device($this->USER, $duid, $push_key);
+
+		if ($updated)
+			$this->response(array('success' => 'Device updated.'));
+
+		$this->error_response(500);
 	}
 
 	function index_delete()
