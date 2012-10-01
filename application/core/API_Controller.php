@@ -26,7 +26,7 @@ class API_Controller extends REST_Controller
 		);
 
 		if (isset($errors[$error_code]))
-			$this->response(array('error' => array('code' => $error_code, 'message' => $errors[$error_code])), 400);
+			$this->response(array('error' => array('code' => $error_code, 'message' => $errors[$error_code])));
 
 		$this->response(array('error' => array('code' => 500, 'message' => 'Unknown error.')));
 	}
