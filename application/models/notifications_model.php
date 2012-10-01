@@ -9,6 +9,17 @@ class Notifications_Model extends CI_Model {
 		$this->load->database();
 	}
 
+	private function queue_key_exists($key)
+	{
+		$this->db->where('queue', $key)
+			->from('notifications');
+
+		if (!$this->db->count_all_results())
+			return false;
+		
+		return true;
+	}
+
 	function enqueue($key, $subject, $message)
 	{
 		$this->db->set('key_id', $key)
@@ -24,6 +35,8 @@ class Notifications_Model extends CI_Model {
 	{
 		$this->load->helper('string');
 		$string = random_string('unique');
+		while($this->queue_key_exists($string))
+			$string = random_string('unique');
 
 		$this->db->set('queue', $string)
 			// ->limit($limit)
