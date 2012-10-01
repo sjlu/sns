@@ -9,6 +9,19 @@ class Notifications_Model extends CI_Model {
 		$this->load->database();
 	}
 
+	function get_notifications_by_user($user)
+	{
+		$this->db->where('keys.user_id', $user)
+			->join('notifications', 'keys.id = notifications.key_id')
+			->order_by('notifications.timestamp', DESC)
+			->select('notifications.subject, notifications.message')
+			->from('keys');
+
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
 	private function queue_key_exists($key)
 	{
 		$this->db->where('queue', $key)
@@ -44,7 +57,7 @@ class Notifications_Model extends CI_Model {
 			->update('notifications');
 
 		$this->db->where('queue', $string)
-			->select('notifications.subject, notifications.message, devices.duid, devices.push_key, notifications.queue')
+			->select('notifications.subject, notifications.message, devices.push_key')
 			->join('keys', 'notifications.key_id = keys.id', 'left')
 			->join('devices', 'keys.user_id = devices.user_id', 'left')
 			->from('notifications');
