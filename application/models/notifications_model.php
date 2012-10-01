@@ -44,7 +44,7 @@ class Notifications_Model extends CI_Model {
 			->update('notifications');
 
 		$this->db->where('queue', $string)
-			->select('notifications.subject, notifications.message, devices.duid, devices.push_key')
+			->select('notifications.subject, notifications.message, devices.duid, devices.push_key notifications.queue')
 			->join('keys', 'notifications.key_id = keys.id', 'left')
 			->join('devices', 'keys.user_id = devices.user_id', 'left')
 			->from('notifications');
