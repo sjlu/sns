@@ -1,1 +1,1 @@
-worker: php index.php send
+worker: cd ~/www/ && ~/php/bin/php index.php send
