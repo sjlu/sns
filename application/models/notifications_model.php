@@ -9,13 +9,14 @@ class Notifications_Model extends CI_Model {
 		$this->load->database();
 	}
 
-	function get_notifications_by_duid($duid)
+	function get_notifications_by_duid($duid, $limit = 100)
 	{
 		$this->db->where('devices.duid', $duid)
 			->join('keys', 'devices.user_id = keys.user_id')
 			->join('notifications', 'keys.id = notifications.key_id')
 			->order_by('notifications.timestamp', "desc")
 			->select('notifications.id, notifications.subject, notifications.message, notifications.timestamp')
+			->limit(100)
 			->from('devices');
 
 		$query = $this->db->get();
