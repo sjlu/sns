@@ -3,7 +3,7 @@
 /**
  * The generated certificate.
  */
-$config['certificate_path'] = APPPATH . 'config/Apns/server_certificates_bundle.pem';
+$config['certificate_path'] = APPPATH . 'config/Apns/server_certificates_bundle_development.pem';
 
 /**
  * The trustworthy certificate.

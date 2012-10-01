@@ -25,6 +25,7 @@ class Apns {
    {
       $message = new ApnsPHP_Message($key);
       $message->setCustomIdentifier('notification');
+      $message->setBadge(1);
       $message->setText($message);
       $message->setSound();
       $message->setExpiry(30);
