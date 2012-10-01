@@ -13,7 +13,7 @@ class Notifications_Model extends CI_Model {
 	{
 		$this->db->where('keys.user_id', $user)
 			->join('notifications', 'keys.id = notifications.key_id')
-			->order_by('notifications.timestamp', DESC)
+			->order_by('notifications.timestamp', "desc")
 			->select('notifications.subject, notifications.message')
 			->from('keys');
 
