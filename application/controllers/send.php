@@ -7,7 +7,7 @@ class Send extends Web_Controller {
 		$this->load->library('apns');
 		$this->load->model('notifications_model');
 
-		$notifications = $this->notifications_model->dequeue(1);
+		$notifications = $this->notifications_model->dequeue(10);
 
 		print_r($notifications);
 
