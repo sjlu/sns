@@ -17,15 +17,15 @@ class Device extends API_Controller {
 		$duid = $this->post('duid');
 		$push_key = $this->post('push_key');
 
-		if (empty($duid) || empty($push_key))
+		if (empty($duid))
 			$this->error_response(100);
 
 		$added = $this->devices_model->add_device($this->USER, $duid, $push_key);
 
 		if ($added)
 			$this->response(array('success' => 'Device added.'));
-		else
-			$this->response(array('success' => 'Device was already added.'));
+		
+		$this->devices_model->update_device($this->USER, $duid, $push_key);
 	}
 
 	function index_delete()

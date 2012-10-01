@@ -14,6 +14,20 @@ class Devices_model extends CI_Model {
 		return true;
 	}
 
+	function update_device($user, $duid, $push_key)
+	{
+		if (!$this->device_exists($user, $duid))
+			return false;
+
+		$this->db->where('user_id', $user)
+			->where('duid', $duid)
+			->set('push_key', $push_key);
+
+		$this->db->update('devices');
+
+		return true;
+	}
+
 	function add_device($user, $duid, $push_key)
 	{
 		if ($this->device_exists($user, $duid))

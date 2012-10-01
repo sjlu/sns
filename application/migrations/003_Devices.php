@@ -24,7 +24,8 @@ class Migration_Devices extends CI_Migration
 				'constraint' => 128
 			),
 			'push_key' => array(
-				'type' => 'TEXT'
+				'type' => 'TEXT',
+				'null' => true
 			)
 		);
 
