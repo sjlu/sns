@@ -26,7 +26,7 @@ class Notifications_Model extends CI_Model {
 		$string = random_string('unique');
 
 		$this->db->set('queue', $string)
-			->limit($limit)
+			// ->limit($limit)
 			->where('queue', null)
 			->update('notifications');
 
