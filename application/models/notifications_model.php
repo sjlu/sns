@@ -20,7 +20,7 @@ class Notifications_Model extends CI_Model {
 		return true;
 	}
 
-	function dequeue($limit = 5)
+	function dequeue()
 	{
 		$this->load->helper('string');
 		$string = random_string('unique');
