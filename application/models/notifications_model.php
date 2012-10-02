@@ -14,7 +14,7 @@ class Notifications_Model extends CI_Model {
 		$this->db->where('devices.duid', $duid)
 			->join('keys', 'devices.user_id = keys.user_id')
 			->join('notifications', 'keys.id = notifications.key_id')
-			->order_by('notifications.timestamp', "desc")
+			->order_by('notifications.id', "desc")
 			->select('notifications.id, notifications.subject, notifications.message, notifications.timestamp')
 			->limit(100)
 			->from('devices');

@@ -41,6 +41,8 @@
 $route['default_controller'] = "frontpage";
 $route['404_override'] = '';
 
+$route['api/notifications/duid/(:any)'] = "api/notifications/index/duid/$1";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
