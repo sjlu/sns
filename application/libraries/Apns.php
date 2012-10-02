@@ -26,11 +26,11 @@ class Apns {
       $this->CONNECTION->setRootCertificationAuthority($this->root_certificate_path);
    }
 
-   public function send_message($key, $text)
+   public function send_message($key, $text, $badge = 0)
    {
       $message = new ApnsPHP_Message($key);
       $message->setCustomIdentifier('notification');
-      // $message->setBadge(1);
+      $message->setBadge($badge);
       $message->setText($text);
       $message->setSound();
       $message->setExpiry(30);
@@ -39,6 +39,5 @@ class Apns {
       $this->CONNECTION->add($message);
       $this->CONNECTION->send();
       $this->CONNECTION->disconnect();
-
    }
 }

@@ -9,6 +9,16 @@ class Notifications_Model extends CI_Model {
 		$this->load->database();
 	}
 
+	function get_unread_count_by_uid($user)
+	{
+		$this->db->where('keys.user_id', $user)
+			->where('notifications.read', 0)
+			->join('notifications', 'keys.id = notifications.key_id')
+			->from('keys');
+
+		return $this->db->count_all_results();
+	}
+
 	function mark_read_by_duid($duid)
 	{
 		$this->db->where('devices.duid', $duid)
@@ -71,7 +81,7 @@ class Notifications_Model extends CI_Model {
 			->update('notifications');
 
 		$this->db->where('queue', $string)
-			->select('notifications.subject, notifications.message, devices.push_key')
+			->select('devices.user_id, notifications.subject, notifications.message, devices.push_key')
 			->join('keys', 'notifications.key_id = keys.id', 'left')
 			->join('devices', 'keys.user_id = devices.user_id', 'left')
 			->from('notifications');
