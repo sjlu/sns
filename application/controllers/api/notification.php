@@ -18,10 +18,10 @@ class Notification extends API_Controller {
 		$this->load->model('notifications_model');
 		$this->notifications_model->enqueue($key_id, $subject, $message);
 
-		$this->response(array('success' => 'Notification queued.'));
-
 		if (isset($_SERVER['SEND_ON_RECEIVE']) && $_SERVER['SEND_ON_RECEIVE'])
 			$this->notifications_model->send();
+
+		$this->response(array('success' => 'Notification queued.'));
 	}
 
 }
