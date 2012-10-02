@@ -15,6 +15,8 @@ class Notifications extends API_Controller {
 		foreach ($notifications as &$n)
 			$n['timestamp'] = date('U', strtotime($n['timestamp']));
 
+		$this->notifications_model->mark_read_by_duid($duid);
+
 		$this->response($notifications);
 	}
 
