@@ -12,7 +12,7 @@ class Send extends Web_Controller {
 		foreach ($notifications as $n)
 		{
 			$unread = $this->notifications_model->get_unread_count_by_uid($n['user_id']);
-			$this->apns->send_message($n['push_key'], $n['subject'].' - '.$n['message']);
+			$this->apns->send_message($n['push_key'], $n['subject'].' - '.$n['message'], $unread);
 		}
 	}
 
