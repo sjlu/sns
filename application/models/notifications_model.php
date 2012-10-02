@@ -13,7 +13,7 @@ class Notifications_Model extends CI_Model {
 	{
 		$this->db->where('keys.user_id', $user)
 			->where('notifications.read', 0)
-			->join('notifications', 'keys.id = notifications.key_id')
+			->join('notifications', 'keys.id = notifications.key_id', 'left')
 			->from('keys');
 
 		return $this->db->count_all_results();
@@ -21,12 +21,21 @@ class Notifications_Model extends CI_Model {
 
 	function mark_read_by_duid($duid)
 	{
-		$this->db->where('devices.duid', $duid)
-			->where('notifications.read', 0)
-			->join('keys', 'devices.user_id = keys.user_id')
-			->join('notifications', 'keys.id = notifications.key_id')
-			->set('notifications.read', 1)
-			->update('devices');
+		$this->db->select('keys.id')
+			->where('devices.duid', $duid)
+			->join('keys', 'devices.user_id = keys.user_id', 'left')
+			->from('devices');
+
+		$query = $this->db->get();
+
+		$key_ids = array();
+		foreach ($query->result_array() as $r)
+			$key_ids[] = $r['id'];
+
+		$this->db->where_in('key_id', $key_ids)
+			->where('read', 0)
+			->set('read', 1)
+			->update('notifications');
 
 		return true;
 	}
