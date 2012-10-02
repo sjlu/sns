@@ -33,6 +33,12 @@ class Migration_Notifications extends CI_Migration
 				'type' => 'VARCHAR',
 				'constraint' => 32,
 				'null' => true
+			),
+			'read' => array(
+				'type' => 'INT',
+				'constraint' => 1,
+				'unsigned' => TRUE,
+				'default' => 0
 			)
 		);
 
