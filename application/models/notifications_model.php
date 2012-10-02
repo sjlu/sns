@@ -32,6 +32,9 @@ class Notifications_Model extends CI_Model {
 		foreach ($query->result_array() as $r)
 			$key_ids[] = $r['id'];
 
+		if (empty($keys_ids))
+			return true;
+
 		$this->db->where_in('key_id', $key_ids)
 			->where('read', 0)
 			->set('read', 1)
