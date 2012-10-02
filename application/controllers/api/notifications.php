@@ -10,7 +10,12 @@ class Notifications extends API_Controller {
 			$this->error_response(100);
 
 		$this->load->model('notifications_model');
-		$this->response($this->notifications_model->get_notifications_by_duid($duid));
+
+		$notifications = $this->notifications_model->get_notifications_by_duid($duid);
+		foreach ($notifications as &$n)
+			$n['timestamp'] = date('U', strtotime($n['timestamp']));
+
+		$this->response($notifications);
 	}
 
 }
