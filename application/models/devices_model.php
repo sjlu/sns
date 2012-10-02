@@ -2,6 +2,18 @@
 
 class Devices_model extends CI_Model {
 
+	private function push_key_exists($user, $push_key)
+	{
+		$this->db->where('user_id', $user)
+			->where('push_key', $push_key)
+			->from('devices');
+
+		if (!$this->db->count_all_results())
+			return false;
+
+		return true;
+	}
+
 	private function device_exists($user, $duid)
 	{
 		$this->db->where('user_id', $user)
