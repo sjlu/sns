@@ -104,4 +104,20 @@ class Notifications_Model extends CI_Model {
 		return array_unique($results);
 	}
 
+	function send()
+	{
+		$notifications = $this->dequeue();
+
+		if (!count($notifications))
+			return;
+
+		$this->load->library('apns');
+
+		foreach ($notifications as $n)
+		{
+			$unread = $this->notifications_model->get_unread_count_by_uid($n['user_id']);
+			$this->apns->send_message($n['push_key'], $n['subject'].' - '.$n['message'], $unread);
+		}
+	}
+
 }

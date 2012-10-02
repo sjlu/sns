@@ -8,7 +8,7 @@ class Apns {
    private $root_certificate_path = '';
    private $environment = 'development';
 
-   public function __construct()
+   function __construct()
    {
       $ci =& get_instance();
       $ci->config->load('apns');
@@ -24,9 +24,10 @@ class Apns {
 
       $this->CONNECTION = new ApnsPHP_Push($environment, $this->certificate_path);
       $this->CONNECTION->setRootCertificationAuthority($this->root_certificate_path);
+      $this->CONNECTION->connect();
    }
 
-   public function send_message($key, $text, $badge = 0)
+   function send_message($key, $text, $badge = 0)
    {
       $message = new ApnsPHP_Message($key);
       $message->setCustomIdentifier('notification');
@@ -35,9 +36,12 @@ class Apns {
       $message->setSound();
       $message->setExpiry(30);
 
-      $this->CONNECTION->connect();
       $this->CONNECTION->add($message);
       $this->CONNECTION->send();
+   }
+
+   function __destruct()
+   {
       $this->CONNECTION->disconnect();
    }
 }
