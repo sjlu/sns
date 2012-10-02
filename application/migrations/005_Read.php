@@ -4,7 +4,7 @@ class Migration_read extends CI_Migration {
 
 	function up() 
 	{
-		$fields = array(
+		$field = array(
 			'read' => array(
 				'type' => 'INT',
 				'constraint' => 1,
@@ -18,7 +18,7 @@ class Migration_read extends CI_Migration {
 
 	function down()
 	{
-		$this->dbfoge->drop_column('notifications', 'read');
+		$this->dbforge->drop_column('notifications', 'read');
 	}
 
 }
