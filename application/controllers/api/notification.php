@@ -13,7 +13,7 @@ class Notification extends API_Controller {
 
 		$this->load->model('keys_model');
 		if (!$key_id = $this->keys_model->get_key_id($key))
-			$this->error_response(300);
+			$this->error_response(201);
 
 		$this->load->model('notifications_model');
 		$this->notifications_model->enqueue($key_id, $subject, $message);

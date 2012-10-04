@@ -28,7 +28,7 @@ class Session extends API_Controller {
          $this->session->set_userdata($session);
       }
       else
-         $this->error_response(1);
+         $this->error_response(300);
 
       $this->response(array('success' => 'Authenticated, session created.', 'user' => $user));
    }
