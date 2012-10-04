@@ -93,7 +93,7 @@ class Notifications_Model extends CI_Model {
 			->update('notifications');
 
 		$this->db->where('queue', $string)
-			->select('notifications.id, devices.user_id, notifications.subject, notifications.message, devices.push_key')
+			->select('notifications.id, devices.user_id, notifications.subject, notifications.message, devices.push_key, keys.key')
 			->join('keys', 'notifications.key_id = keys.id', 'left')
 			->join('devices', 'keys.user_id = devices.user_id', 'left')
 			->from('notifications');
@@ -116,7 +116,10 @@ class Notifications_Model extends CI_Model {
 		foreach ($notifications as $n)
 		{
 			$unread = $this->notifications_model->get_unread_count_by_uid($n['user_id']);
-			$this->apns->send_message($n['push_key'], $n['subject'].' - '.$n['message'], $unread);
+			
+			// if the message failed to send, place it back into the queue to try later
+			if (!$this->apns->send_message($n['push_key'], $n['subject'].' - '.$n['message'], $unread))
+				$this->enqueue($n['key'], $n['subject'], $n['message']);
 		}
 	}
 
