@@ -39,9 +39,6 @@ class Apns {
       $this->CONNECTION->add($message);
       $this->CONNECTION->send();
 
-      if (!empty($this->CONNECTION->getErrors()))
-         return false;
-
       return true;
    }
 
