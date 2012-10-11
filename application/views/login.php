@@ -26,4 +26,3 @@
       <a style="vertical-align: middle; margin-left: 10px;" href="<?= site_url('admin/login/forgot_password') ?>">Forgot Password</a>
    </form>
 </div>
-€

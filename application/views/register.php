@@ -2,20 +2,32 @@
    <h3>Login</h3>
    <? if (!empty($error)): ?>
       <div class="alert alert-error" style="margin-bottom: 5px;">
-         <b>Error!</b> <?= $error ?>
+         <i class="icon-info-sign" style="margin-right: 5px;"></i> <?= $error ?>
       </div>
    <? elseif (!empty($info)): ?>
       <div class="alert alert-info" style="margin-bottom: 5px;">
-         <b>Info.</b> <?= $info ?>
+         <i class="icon-info-sign" style="margin-right: 5px;"></i> <?= $info ?>
       </div>
    <? endif; ?>
    <form class="well" method="POST">
       <label>Email</label>
-      <input type="text" name="email" style="width: 360px;" <? if (!empty($email)): ?> value="<?= $email ?>" <? endif; ?>>
+      <?= form_input(array(
+         'name' => 'email',
+         'style' => 'width: 360px;',
+         'type' => 'text'
+      )) ?>
       <label>Password</label>
-      <input type="password" name="password" style="width: 360px;">
+      <?= form_input(array(
+         'name' => 'password',
+         'style' => 'width: 360px;',
+         'type' => 'password'
+      )) ?>
       <label>Confirm Password</label>
-      <input type="password" name="confirm_password" style="width: 360px;">
-      <button type="submit" class="btn btn-primary">Register</button>
+      <?= form_input(array(
+         'name' => 'confirm_password',
+         'style' => 'width: 360px;',
+         'type' => 'password'
+      )) ?>
+      <button type="submit" name="submit" value="submit" class="btn btn-primary">Register</button>
    </form>
 </div>
