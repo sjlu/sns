@@ -15,15 +15,15 @@ class Admin extends Web_Controller {
 	private function view()
 	{
 		$this->load->view('include/header');
-		$this->load->view('admin', array(
-			'keys' => $this->get_keys($this->user)
+		$this->load->view('admin/view', array(
+			'keys' => $this->keys_model->get_keys($this->user)
 		));
 		$this->load->view('include/footer');
 	}
 
-	function generate_key()
+	function create_key()
 	{
-		$this->keys_model->add_key($this->user());
+		$this->keys_model->add_key($this->user);
 		$this->view();
 	}
 
