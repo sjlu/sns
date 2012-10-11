@@ -1,11 +1,18 @@
 <div class="container">
 	<div id="buttons">
-		<div class="btn btn-primary btn-large">Login</div>
-		<div class="btn btn-large">Register</div>
+		<a class="btn btn-primary btn-large" href="<?= base_url('/login') ?>">Login</a>
+		<a class="btn btn-large" href="<?= base_url('/register') ?>">Register</a>
 	</div>
    <div class="hero-unit">
-      <h2>Simple Notification Service</h2>
-      <p><u>Simple Notification Service</u> or <strong>SNS</strong> allows you to send any notification you want straight to your iOS devices. This service was built from the ground up with speed and scalability in mind. It's easy to use and has a full fledged API to interact with the service. The best part, it's completely free to use.</p>
+      <div class="row">
+         <div class="span2">
+            <img src="<?= base_url('assets/img/icon.png') ?>" alt="logo" />
+         </div>
+         <div class="span8">
+            <h2>Simple Notification Service</h2>
+            <p><u>Simple Notification Service</u> or <strong>SNS</strong> allows you to send any notification you want straight to your iOS devices. This service was built from the ground up with speed and scalability in mind. It's easy to use and has a full fledged API to interact with the service. The best part, it's completely free to use.</p>
+      </div>
+      </div>
    </div>
    <h2>API Documentation</h2>
    <div class="well">

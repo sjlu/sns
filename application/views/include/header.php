@@ -9,6 +9,10 @@
 
    <title>Simple Notification Service</title>
 
+   <link rel="icon" type="image/png" href="<?= base_url('assets/img/icon.png') ?>">
+   <link rel="apple-touch-icon" href="<?= base_url('assets/img/icon.png') ?>">
+   <meta name="apple-itunes-app" content="app-id=567920107, app-argument=http://store.apple.com/us" />
+
    <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
    <link href="<?= base_url('assets/css/bootstrap-responsive.min.css') ?>" rel="stylesheet">
 	<link href="<?= base_url('assets/css/font-awesome.css') ?>" rel="stylesheet">
