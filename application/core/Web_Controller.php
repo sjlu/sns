@@ -21,7 +21,7 @@ class Web_Controller extends CI_Controller
    	$this->load->library('session');
    	$user = $this->session->userdata('user');
    	if (!$user)
-   		$this->error_response(200);
+   		show_404();
 
    	return $user;
 	}
