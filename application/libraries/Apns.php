@@ -29,6 +29,9 @@ class Apns {
 
    function send_message($key, $text, $badge = 0)
    {
+      if ($key == NULL || $key == 0 || $key == '0')
+         return false;
+
       $message = new ApnsPHP_Message($key);
       $message->setCustomIdentifier('notification');
       $message->setBadge($badge);
@@ -37,7 +40,14 @@ class Apns {
       $message->setExpiry(30);
 
       $this->CONNECTION->add($message);
-      $this->CONNECTION->send();
+
+      try {
+         $this->CONNECTION->send();
+      } 
+      catch (Exception $e)
+      {
+         return false;
+      }
 
       return true;
    }
