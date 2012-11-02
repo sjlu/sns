@@ -127,7 +127,8 @@ class Notifications_Model extends CI_Model {
 
 			// if the message failed to send, place it back into the queue to try later
 			if (!$this->apns->send_message($n['push_key'], $n['subject'].' - '.$n['message'], $unread))
-				$this->enqueue($n['key_id'], $n['subject'], $n['message']);
+				// $this->enqueue($n['key_id'], $n['subject'], $n['message']);
+				continue;
 		}
 	}
 
