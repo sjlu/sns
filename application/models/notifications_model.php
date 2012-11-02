@@ -94,7 +94,14 @@ class Notifications_Model extends CI_Model {
 
 		$this->db->where('queue', $string)
          ->where('devices.push_key IS NOT NULL')
-			->select('notifications.id, devices.user_id, notifications.subject, notifications.message, devices.push_key, keys.key')
+			->select('
+				notifications.id, 
+				notifications.key_id,
+				notifications.subject, 
+				notifications.message, 
+				devices.user_id, 
+				devices.push_key
+			')
 			->join('keys', 'notifications.key_id = keys.id', 'left')
 			->join('devices', 'keys.user_id = devices.user_id', 'left')
 			->from('notifications');
@@ -120,7 +127,7 @@ class Notifications_Model extends CI_Model {
 
 			// if the message failed to send, place it back into the queue to try later
 			if (!$this->apns->send_message($n['push_key'], $n['subject'].' - '.$n['message'], $unread))
-				$this->enqueue($n['key'], $n['subject'], $n['message']);
+				$this->enqueue($n['key_id'], $n['subject'], $n['message']);
 		}
 	}
 
