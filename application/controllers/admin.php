@@ -22,6 +22,12 @@ class Admin extends Web_Controller {
 		$this->load->view('include/footer');
 	}
 
+	function delete_key($key)
+	{
+		$this->keys_model->delete_key($this->user, $key);
+		$this->view();
+	}
+
 	function create_key()
 	{
 		$this->keys_model->add_key($this->user);

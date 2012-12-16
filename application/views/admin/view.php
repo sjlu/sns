@@ -13,7 +13,7 @@
 									<h5><?= $k['key'] ?></h5>
 								</td>
 								<td> 
-									<a class="btn btn-danger" href="<?= base_url('/admin/delete_key') ?>"><i class="icon-trash"></i></a>
+									<a class="btn btn-danger" href="<?= base_url('/admin/delete_key/' . $key['key']) ?>"><i class="icon-trash"></i></a>
 								</td>
 							</tr>
 						<? endforeach; ?>
