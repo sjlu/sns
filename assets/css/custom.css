@@ -15,8 +15,8 @@ body {
 	margin-bottom: 5px;
 }
 
-i {
-	margin-right: 5px;
+.table td {
+	vertical-align: middle;
 }
 
 /*
@@ -53,4 +53,16 @@ i {
 #forgot-password {
 	vertical-align: middle;
 	margin-left: 10px;
+}
+
+/*
+ * ADMIN VIEW PAGE
+ */
+
+#notifications h4 {
+	margin-bottom: 0px;
+}
+
+#keys td {
+	text-align: center;
 }

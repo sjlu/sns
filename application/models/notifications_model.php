@@ -9,6 +9,19 @@ class Notifications_Model extends CI_Model {
 		$this->load->database();
 	}
 
+	function get_notifications_by_user($user, $limit = 25)
+	{
+		$this->db->where('keys.user_id', $user)
+			->join('notifications', 'keys.id = notifications.key_id', 'inner')
+			->order_by('notifications.id', 'desc')
+			->limit($limit)
+			->from('keys');
+
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
 	function get_unread_count_by_uid($user)
 	{
 		$this->db->where('keys.user_id', $user)
