@@ -10,7 +10,7 @@
 						<? foreach ($keys as $k): ?>
 							<tr>
 								<td>
-									<h4><?= $k['key'] ?></h4>
+									<h5><?= $k['key'] ?></h5>
 								</td>
 								<td> 
 									<a class="btn btn-danger" href="<?= base_url('/admin/delete_key') ?>"><i class="icon-trash"></i></a>
