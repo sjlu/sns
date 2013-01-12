@@ -14,7 +14,7 @@
  * to aldo.armiento@gmail.com so we can send you a copy immediately.
  *
  * @author (C) 2010 Aldo Armiento (aldo.armiento@gmail.com)
- * @version $Id: Autoload.php 62 2010-11-24 14:59:12Z aldo.armiento $
+ * @version $Id$
  */
 
 /**
@@ -45,8 +45,6 @@ function ApnsPHP_Autoload($sClassName)
 		$sPath, DIRECTORY_SEPARATOR,
 		str_replace('_', DIRECTORY_SEPARATOR, $sClassName)
 	);
-	if (preg_match('/CI/', $sFile))
-		return;
 	if (!is_file($sFile) || !is_readable($sFile)) {
 		throw new Exception("Class file '{$sFile}' does not exists");
 	}
