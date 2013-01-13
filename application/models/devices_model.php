@@ -66,4 +66,14 @@ class Devices_model extends CI_Model {
 		return true;
 	}
 
+	function get_devices($user)
+	{
+		$this->db->where('user_id', $user)
+			->from('devices');
+
+		$query = $this->db->get();
+
+		return $query->result_array();
+	}
+
 }

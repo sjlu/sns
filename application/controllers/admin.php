@@ -9,7 +9,7 @@ class Admin extends Web_Controller {
 		parent::__construct();
 
 		$this->user = $this->require_session();
-		$this->load->model(array('keys_model', 'notifications_model'));
+		$this->load->model(array('keys_model', 'notifications_model', 'devices_model'));
 	}
 
 	private function view()
@@ -17,7 +17,8 @@ class Admin extends Web_Controller {
 		$this->load->view('include/header');
 		$this->load->view('admin/view', array(
 			'keys' => $this->keys_model->get_keys($this->user),
-			'notifications' => $this->notifications_model->get_notifications_by_user($this->user)
+			'notifications' => $this->notifications_model->get_notifications_by_user($this->user),
+			'devices' => $this->devices_model->get_devices($this->user)
 		));
 		$this->load->view('include/footer');
 	}
