@@ -122,7 +122,7 @@ class Notifications_Model extends CI_Model {
 		$query = $this->db->get();
 		$results = $query->result_array();
 
-		return array_unique($results);
+		return $results;
 	}
 
 	function send()
@@ -134,14 +134,16 @@ class Notifications_Model extends CI_Model {
 
 		$this->load->library('apns');
 
+		print_r($notifications);
+
 		foreach ($notifications as $n)
 		{
 			$unread = $this->notifications_model->get_unread_count_by_uid($n['user_id']);
 
 			// if the message failed to send, place it back into the queue to try later
 			if (!$this->apns->send_message($n['push_key'], $n['subject'].' - '.$n['message'], $unread))
-				// $this->enqueue($n['key_id'], $n['subject'], $n['message']);
-				continue;
+				$this->enqueue($n['key_id'], $n['subject'], $n['message']);
+				// continue;
 		}
 	}
 

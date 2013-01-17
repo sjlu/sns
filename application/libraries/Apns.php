@@ -14,21 +14,21 @@ class Apns {
       $ci->config->load('apns');
       $this->certificate_path = $ci->config->item('certificate_path');
       $this->root_certificate_path = $ci->config->item('root_certificate_path');
-      $this->environment = $ci->config->item('apns_environment');
+      $environment = $ci->config->item('apns_environment');
 
       require_once(APPPATH.'libraries/ApnsPHP/Autoload.php');
 
-      $environment = ApnsPHP_Abstract::ENVIRONMENT_SANDBOX;
-      if ($this->environment == 'production')
-         $environment = ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
-
-      $this->CONNECTION = new ApnsPHP_Push($environment, $this->certificate_path);
-      $this->CONNECTION->setRootCertificationAuthority($this->root_certificate_path);
-      $this->CONNECTION->connect();
+      $this->environment = ApnsPHP_Abstract::ENVIRONMENT_SANDBOX;
+      if ($environment == 'production')
+         $this->environment = ApnsPHP_Abstract::ENVIRONMENT_PRODUCTION;
    }
 
    function send_message($key, $text, $badge = 0)
    {
+      $socket = new ApnsPHP_Push($this->environment, $this->certificate_path);
+      $socket->setRootCertificationAuthority($this->root_certificate_path);
+      $socket->connect();
+
       $message = new ApnsPHP_Message($key);
       $message->setCustomIdentifier('notification');
       $message->setBadge($badge);
@@ -36,21 +36,21 @@ class Apns {
       $message->setSound();
       $message->setExpiry(30);
 
-      $this->CONNECTION->add($message);
+      $socket->add($message);
 
       try {
-         $this->CONNECTION->send();
+         $socket->send();
+         $socket->disconnect();
       } 
       catch (Exception $e)
       {
          return false;
       }
 
-      return true;
-   }
+      $errors = $socket->getErrors();
+      if (!empty($errors))
+         return false;
 
-   function __destruct()
-   {
-      $this->CONNECTION->disconnect();
+      return true;
    }
 }
