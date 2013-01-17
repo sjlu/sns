@@ -134,8 +134,6 @@ class Notifications_Model extends CI_Model {
 
 		$this->load->library('apns');
 
-		print_r($notifications);
-
 		foreach ($notifications as $n)
 		{
 			$unread = $this->notifications_model->get_unread_count_by_uid($n['user_id']);
