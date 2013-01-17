@@ -63,6 +63,6 @@ body {
 	margin-bottom: 0px;
 }
 
-#keys td {
+#keys td, #devices td {
 	text-align: center;
 }

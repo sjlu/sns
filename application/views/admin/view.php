@@ -22,6 +22,7 @@
 			<a class="btn btn-primary pull-right pull-bottom" href="<?= base_url('/admin/create_key') ?>">
 				<i class="icon-plus"></i> Add Key
 			</a>
+         <br />
 			<h3>Devices</h3>
 			<table id="devices" class="table table-bordered table-hover">
 				<tbody>
